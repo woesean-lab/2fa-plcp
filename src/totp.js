@@ -3,14 +3,14 @@ function decodeBase32(input) {
   const cleaned = input.toUpperCase().replace(/[\s=-]/g, "");
 
   if (!cleaned) {
-    throw new Error("2FA secret parametresi bulunamadi.");
+    throw new Error("The 2FA secret parameter was not found.");
   }
 
   let bits = "";
   for (const char of cleaned) {
     const value = alphabet.indexOf(char);
     if (value === -1) {
-      throw new Error("Secret Base32 formatinda degil.");
+      throw new Error("The secret is not in Base32 format.");
     }
     bits += value.toString(2).padStart(5, "0");
   }

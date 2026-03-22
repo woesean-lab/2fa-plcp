@@ -6,7 +6,7 @@ function readSecretFromUrl() {
 }
 
 function buildMissingSecretMessage() {
-  return "Linkte `?2fa=` parametresi yok. Ornek: /?2fa=5VJG3DHWNSPS4WTJ";
+  return "The `?2fa=` parameter is missing from the URL. Example: /?2fa=5VJG3DHWNSPS4WTJ";
 }
 
 export default function App() {
@@ -43,7 +43,7 @@ export default function App() {
       } catch (generationError) {
         setOtp("000000");
         setRemaining(30);
-        setError(generationError.message || "2FA kodu uretilirken hata olustu.");
+        setError(generationError.message || "An error occurred while generating the 2FA code.");
       }
     };
 
@@ -60,21 +60,21 @@ export default function App() {
       <section className="card">
         <div className="hero">
           <p className="eyebrow">React + Vite</p>
-          <h1>2FA Kod Uretici</h1>
+          <h1>2FA Code Generator</h1>
           <p className="intro">
-            Sayfa, URL icindeki <code>?2fa=SECRET</code> parametresini okuyup 30 saniyelik TOTP kodu uretir.
+            This page reads the <code>?2fa=SECRET</code> parameter from the URL and generates a 30-second TOTP code.
           </p>
         </div>
 
         {!error ? (
           <section className="code-card">
-            <span className="label">Aktif Kod</span>
+            <span className="label">Active Code</span>
             <div className="otp">{otp}</div>
 
             <div className="meta-grid">
               <div className="meta-box">
-                <span className="label">Kalan Sure</span>
-                <strong>{remaining} sn</strong>
+                <span className="label">Time Left</span>
+                <strong>{remaining}s</strong>
               </div>
 
               <div className="meta-box">
@@ -88,7 +88,7 @@ export default function App() {
         )}
 
         <section className="hint-box">
-          <span className="label">Ornek Link</span>
+          <span className="label">Example Link</span>
           <code>{window.location.origin}/?2fa=5VJG3DHWNSPS4WTJ</code>
         </section>
       </section>

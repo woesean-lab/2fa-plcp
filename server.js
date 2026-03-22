@@ -27,7 +27,7 @@ function sendFile(response, filePath) {
 
 function sendNotBuilt(response) {
   response.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });
-  response.end("Build output bulunamadi. Once `npm run build` calismali.");
+  response.end("Build output was not found. `npm run build` must run first.");
 }
 
 const server = http.createServer((request, response) => {
