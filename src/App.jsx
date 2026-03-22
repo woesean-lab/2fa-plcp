@@ -107,7 +107,7 @@ export default function App() {
   const copyLabel = copied ? "Copied" : "Tap to copy";
   const secondsLabel = remaining === 1 ? "second" : "seconds";
   const cyclePercent = Math.round((remaining / 30) * 100);
-  const otpDigits = otp.split("");
+  const displayOtp = otp.slice(0, 3) + " " + otp.slice(3);
   const panelClassName = copied
     ? "border-amber-300/20 shadow-[0_36px_90px_rgba(2,6,23,0.78)] ring-1 ring-amber-200/10"
     : "border-white/10 shadow-[0_32px_80px_rgba(2,6,23,0.72)]";
@@ -130,169 +130,116 @@ export default function App() {
 
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 py-10 sm:px-8">
         <section
-          className={`w-full max-w-6xl overflow-hidden rounded-[34px] border bg-slate-900/80 backdrop-blur-2xl transition-all duration-200 ${panelClassName}`}
+          className={`w-full max-w-3xl overflow-hidden rounded-[34px] border bg-slate-900/80 backdrop-blur-2xl transition-all duration-200 ${panelClassName}`}
         >
-          <div className="grid lg:grid-cols-[minmax(0,1.3fr)_22rem]">
-            <div className="p-6 sm:p-8 lg:p-10">
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-slate-300">
-                  <span className="h-2 w-2 rounded-full bg-amber-300 shadow-[0_0_18px_rgba(252,211,77,0.75)]" />
-                  {error ? "2FA required" : "Live authenticator"}
-                </div>
-
-                <div className="space-y-3">
-                  <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                    {title}
-                  </h1>
-                  <p className="max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{subtitle}</p>
-                </div>
+          <div className="p-6 sm:p-8 lg:p-10">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-slate-300">
+                <span className="h-2 w-2 rounded-full bg-amber-300 shadow-[0_0_18px_rgba(252,211,77,0.75)]" />
+                {error ? "2FA required" : "Live authenticator"}
               </div>
 
-              {!error ? (
-                <>
-                  <button
-                    className={`group relative mt-10 w-full cursor-pointer select-none overflow-hidden rounded-[32px] border bg-gradient-to-b px-5 py-5 text-left transition duration-300 ease-out [-webkit-tap-highlight-color:transparent] hover:-translate-y-0.5 hover:border-amber-300/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-200/60 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-950 sm:px-6 sm:py-6 ${codeCardClassName}`}
-                    onClick={handleCopy}
-                    type="button"
-                  >
-                    <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                    <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-amber-300/10 blur-3xl transition duration-300 group-hover:bg-amber-300/15" />
-
-                    <div className="relative flex flex-col gap-5">
-                      <div className="flex items-center justify-between gap-3">
-                        <div>
-                          <div className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Current code</div>
-                          <div className="mt-2 text-sm text-slate-400">Click anywhere on this card to copy the code.</div>
-                        </div>
-
-                        <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-sm text-slate-300 transition group-hover:border-amber-300/20 group-hover:text-white">
-                          <svg
-                            aria-hidden="true"
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.8"
-                            viewBox="0 0 24 24"
-                          >
-                            {copied ? (
-                              <path d="M5 13.5 9 17l10-10" />
-                            ) : (
-                              <>
-                                <rect height="13" rx="2" width="13" x="8" y="8" />
-                                <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
-                              </>
-                            )}
-                          </svg>
-                          {copyLabel}
-                        </span>
-                      </div>
-
-                      <div className="grid grid-cols-6 gap-2 sm:gap-3">
-                        {otpDigits.map((digit, index) => (
-                          <div
-                            className={`grid aspect-square place-items-center rounded-2xl border text-center font-mono text-2xl font-semibold tracking-tight shadow-inner sm:text-4xl ${
-                              copied
-                                ? "border-amber-300/25 bg-amber-300/8 text-white"
-                                : "border-white/10 bg-white/[0.04] text-white"
-                            } ${index === 2 ? "mr-2 sm:mr-3" : ""}`}
-                            key={`${digit}-${index}`}
-                          >
-                            {digit}
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-400">
-                        <span className="inline-flex items-center gap-2">
-                          <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                          Secure and ready to paste
-                        </span>
-                        <span>{copied ? "Clipboard updated just now" : "Waiting for copy"}</span>
-                      </div>
-                    </div>
-                  </button>
-
-                  <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                    <section className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5">
-                      <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Refresh flow</div>
-                      <p className="mt-3 text-sm leading-6 text-slate-300 sm:text-base">
-                        A new code will be ready in {remaining} {secondsLabel}. No manual refresh is needed.
-                      </p>
-                      <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/5">
-                        <div
-                          className="h-full rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-100 transition-[width] duration-1000 ease-linear"
-                          style={{ width: progressWidth }}
-                        />
-                      </div>
-                    </section>
-
-                    <section className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5">
-                      <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Clipboard feel</div>
-                      <p className="mt-3 text-sm leading-6 text-slate-300 sm:text-base">
-                        The copy card reacts on hover, updates its label after copy, and confirms the action with a toast.
-                      </p>
-                    </section>
-                  </div>
-                </>
-              ) : (
-                <section className="mt-10 rounded-[28px] border border-rose-400/15 bg-rose-400/10 p-6">
-                  <div className="text-xs font-medium uppercase tracking-[0.18em] text-rose-300">Missing setup</div>
-                  <p className="mt-3 text-sm leading-6 text-rose-100/80 sm:text-base">{error}</p>
-                </section>
-              )}
+              <div className="space-y-3">
+                <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+                  {title}
+                </h1>
+                <p className="max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{subtitle}</p>
+              </div>
             </div>
 
-            <aside className="border-t border-white/10 bg-slate-950/40 p-6 sm:p-8 lg:border-l lg:border-t-0 lg:p-10">
-              {!error ? (
-                <>
-                  <div className="rounded-[30px] border border-white/10 bg-white/[0.03] p-6">
-                    <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Countdown</div>
+            {!error ? (
+              <>
+                <button
+                  className={`group relative mt-10 w-full cursor-pointer select-none overflow-hidden rounded-[32px] border bg-gradient-to-b px-6 py-6 text-left transition duration-300 ease-out [-webkit-tap-highlight-color:transparent] hover:-translate-y-0.5 hover:border-amber-300/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-200/60 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-950 active:scale-[0.995] sm:px-8 sm:py-8 ${codeCardClassName}`}
+                  onClick={handleCopy}
+                  type="button"
+                >
+                  <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                  <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 bg-[radial-gradient(circle_at_top_right,rgba(252,211,77,0.18),transparent_58%)] opacity-80" />
 
-                    <div className="mt-6 flex items-center justify-center">
-                      <div className="relative grid aspect-square w-40 place-items-center rounded-full" style={timerStyle}>
-                        <div className="absolute h-[132px] w-[132px] rounded-full border border-white/10 bg-slate-900 shadow-inner shadow-black/30" />
-                        <div className="relative z-10 grid justify-items-center">
-                          <strong className="text-[2.75rem] font-semibold leading-none text-white">{remaining}</strong>
-                          <span className="mt-1 text-sm text-slate-400">seconds</span>
-                        </div>
+                  <div className="relative flex flex-wrap items-start justify-between gap-4">
+                    <div>
+                      <div className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Authenticator code</div>
+                      <div className="mt-2 text-sm text-slate-400">One tap copies the current 2FA value.</div>
+                    </div>
+
+                    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-sm text-slate-300 transition group-hover:border-amber-300/20 group-hover:text-white">
+                      <svg
+                        aria-hidden="true"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.8"
+                        viewBox="0 0 24 24"
+                      >
+                        {copied ? (
+                          <path d="M5 13.5 9 17l10-10" />
+                        ) : (
+                          <>
+                            <rect height="13" rx="2" width="13" x="8" y="8" />
+                            <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+                          </>
+                        )}
+                      </svg>
+                      {copyLabel}
+                    </span>
+                  </div>
+
+                  <div className="relative mt-8 flex items-end justify-between gap-4">
+                    <div className="font-mono text-[3.35rem] font-semibold tracking-[0.24em] text-white sm:text-[5.5rem]">
+                      {displayOtp}
+                    </div>
+                    <div className="hidden rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-right sm:block">
+                      <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Refreshes in</div>
+                      <div className="mt-1 text-3xl font-semibold tracking-tight text-white">{remaining}s</div>
+                    </div>
+                  </div>
+                </button>
+
+                <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_14rem]">
+                  <section className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Refresh flow</div>
+                        <p className="mt-2 text-sm leading-6 text-slate-300 sm:text-base">
+                          A new code will be ready in {remaining} {secondsLabel}. No manual refresh is needed.
+                        </p>
+                      </div>
+                      <div className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs font-medium text-slate-300">
+                        {cyclePercent}%
                       </div>
                     </div>
 
-                    <div className="mt-6 text-center">
-                      <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Cycle health</div>
-                      <div className="mt-2 text-3xl font-semibold tracking-tight text-white">{cyclePercent}%</div>
+                    <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/5">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-100 transition-[width] duration-1000 ease-linear"
+                        style={{ width: progressWidth }}
+                      />
                     </div>
-                  </div>
+                  </section>
 
-                  <div className="mt-4 rounded-[30px] border border-white/10 bg-white/[0.03] p-6">
-                    <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Session notes</div>
-                    <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
-                      <li className="flex gap-3">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-amber-300" />
-                        The code updates every second and rolls over every 30 seconds.
-                      </li>
-                      <li className="flex gap-3">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-amber-300" />
-                        Click the main code card at any time to copy the current value.
-                      </li>
-                      <li className="flex gap-3">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-amber-300" />
-                        Keep this tab open if you want a continuously fresh authenticator code.
-                      </li>
-                    </ul>
-                  </div>
-                </>
-              ) : (
-                <div className="rounded-[30px] border border-white/10 bg-white/[0.03] p-6">
-                  <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Waiting for input</div>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">
-                    Once a valid secret is present in the URL, this panel will show the live countdown and refresh state.
-                  </p>
+                  <section className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5">
+                    <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Countdown</div>
+                    <div className="mt-4 flex items-center justify-center">
+                      <div className="relative grid aspect-square w-28 place-items-center rounded-full" style={timerStyle}>
+                        <div className="absolute h-[92px] w-[92px] rounded-full border border-white/10 bg-slate-900 shadow-inner shadow-black/30" />
+                        <div className="relative z-10 grid justify-items-center">
+                          <strong className="text-[2rem] font-semibold leading-none text-white">{remaining}</strong>
+                          <span className="mt-1 text-xs text-slate-400">sec</span>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
                 </div>
-              )}
-            </aside>
+              </>
+            ) : (
+              <section className="mt-10 rounded-[28px] border border-rose-400/15 bg-rose-400/10 p-6">
+                <div className="text-xs font-medium uppercase tracking-[0.18em] text-rose-300">Missing setup</div>
+                <p className="mt-3 text-sm leading-6 text-rose-100/80 sm:text-base">{error}</p>
+              </section>
+            )}
           </div>
         </section>
       </div>
