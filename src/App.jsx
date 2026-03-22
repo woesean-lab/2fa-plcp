@@ -129,11 +129,11 @@ export default function App() {
 
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 py-10 sm:px-8">
         <section
-          className={`w-full max-w-3xl overflow-hidden rounded-[34px] border bg-slate-900/80 backdrop-blur-2xl transition-all duration-200 ${panelClassName}`}
+          className={`w-full max-w-3xl overflow-hidden rounded-[4px] border bg-slate-900/80 backdrop-blur-2xl transition-all duration-200 ${panelClassName}`}
         >
           <div className="p-6 sm:p-8 lg:p-10">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-slate-300">
+              <div className="inline-flex items-center gap-2 rounded-[4px] border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-slate-300">
                 <span className="h-2 w-2 rounded-full bg-amber-300 shadow-[0_0_18px_rgba(252,211,77,0.75)]" />
                 {error ? "2FA required" : "Live authenticator"}
               </div>
@@ -148,8 +148,8 @@ export default function App() {
 
             {!error ? (
               <>
-                <button
-                  className={`group relative mt-10 w-full cursor-pointer select-none overflow-hidden rounded-[32px] border bg-gradient-to-b px-6 py-6 text-left transition duration-300 ease-out [-webkit-tap-highlight-color:transparent] hover:-translate-y-0.5 hover:border-amber-300/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-200/60 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-950 active:scale-[0.995] sm:px-8 sm:py-8 ${codeCardClassName}`}
+              <button
+                  className={`group relative mt-10 w-full cursor-pointer select-none overflow-hidden rounded-[4px] border bg-gradient-to-b px-6 py-6 text-left transition duration-300 ease-out [-webkit-tap-highlight-color:transparent] hover:-translate-y-0.5 hover:border-amber-300/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-200/60 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-950 active:scale-[0.995] sm:px-8 sm:py-8 ${codeCardClassName}`}
                   onClick={handleCopy}
                   type="button"
                 >
@@ -162,7 +162,7 @@ export default function App() {
                       <div className="mt-2 text-sm text-slate-400">One tap copies the current 2FA value.</div>
                     </div>
 
-                    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-sm text-slate-300 transition group-hover:border-amber-300/20 group-hover:text-white">
+                    <span className="inline-flex items-center gap-2 rounded-[4px] border border-white/10 bg-black/20 px-3 py-1.5 text-sm text-slate-300 transition group-hover:border-amber-300/20 group-hover:text-white">
                       <svg
                         aria-hidden="true"
                         className="h-4 w-4"
@@ -190,7 +190,7 @@ export default function App() {
                     <div className="font-mono text-[3.35rem] font-semibold tracking-[0.24em] text-white sm:text-[5.5rem]">
                       {otp}
                     </div>
-                    <div className="hidden rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-right sm:block">
+                    <div className="hidden rounded-[4px] border border-white/10 bg-black/20 px-4 py-3 text-right sm:block">
                       <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Refreshes in</div>
                       <div className="mt-1 text-3xl font-semibold tracking-tight text-white">{remaining}s</div>
                     </div>
@@ -198,7 +198,7 @@ export default function App() {
                 </button>
 
                 <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_14rem]">
-                  <section className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5">
+                  <section className="rounded-[4px] border border-white/10 bg-white/[0.03] p-5">
                     <div className="flex items-center justify-between gap-4">
                       <div>
                         <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Refresh flow</div>
@@ -206,20 +206,20 @@ export default function App() {
                           A new code will be ready in {remaining} {secondsLabel}. No manual refresh is needed.
                         </p>
                       </div>
-                      <div className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs font-medium text-slate-300">
+                      <div className="rounded-[4px] border border-white/10 bg-black/20 px-3 py-1 text-xs font-medium text-slate-300">
                         {cyclePercent}%
                       </div>
                     </div>
 
-                    <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/5">
+                    <div className="mt-5 h-2 overflow-hidden rounded-[4px] bg-white/5">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-100 transition-[width] duration-1000 ease-linear"
+                        className="h-full rounded-[4px] bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-100 transition-[width] duration-1000 ease-linear"
                         style={{ width: progressWidth }}
                       />
                     </div>
                   </section>
 
-                  <section className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5">
+                  <section className="rounded-[4px] border border-white/10 bg-white/[0.03] p-5">
                     <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Countdown</div>
                     <div className="mt-4 flex items-center justify-center">
                       <div className="relative grid aspect-square w-28 place-items-center rounded-full" style={timerStyle}>
@@ -234,7 +234,7 @@ export default function App() {
                 </div>
               </>
             ) : (
-              <section className="mt-10 rounded-[28px] border border-rose-400/15 bg-rose-400/10 p-6">
+              <section className="mt-10 rounded-[4px] border border-rose-400/15 bg-rose-400/10 p-6">
                 <div className="text-xs font-medium uppercase tracking-[0.18em] text-rose-300">Missing setup</div>
                 <p className="mt-3 text-sm leading-6 text-rose-100/80 sm:text-base">{error}</p>
               </section>
@@ -249,7 +249,7 @@ export default function App() {
           copied ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
         }`}
       >
-        <div className="inline-flex items-center gap-3 rounded-full border border-amber-300/20 bg-slate-900/95 px-4 py-2 text-sm text-white shadow-2xl shadow-black/50 backdrop-blur-xl">
+        <div className="inline-flex items-center gap-3 rounded-[4px] border border-amber-300/20 bg-slate-900/95 px-4 py-2 text-sm text-white shadow-2xl shadow-black/50 backdrop-blur-xl">
           <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-300/15 text-amber-200">
             <svg
               aria-hidden="true"
