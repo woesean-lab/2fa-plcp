@@ -135,7 +135,7 @@ export default function App() {
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 rounded-[4px] border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-slate-300">
                 <span className="h-2 w-2 rounded-full bg-amber-300 shadow-[0_0_18px_rgba(252,211,77,0.75)]" />
-                {error ? "2FA required" : "Live authenticator"}
+                Pulcip Store {error ? "2FA required" : "Live authenticator"}
               </div>
 
               <div className="space-y-3">
