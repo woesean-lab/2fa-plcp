@@ -152,7 +152,7 @@ export default function App() {
           {!error ? (
             <>
               <button
-                className={`group relative mt-8 w-full cursor-copy select-none overflow-hidden rounded-[30px] border bg-gradient-to-b px-6 py-6 text-left transition duration-300 ease-out [-webkit-tap-highlight-color:transparent] hover:-translate-y-0.5 hover:border-emerald-400/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/60 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-950 active:scale-[0.995] sm:px-8 sm:py-8 ${codeCardClassName}`}
+                className={`group relative mt-8 w-full cursor-pointer select-none overflow-hidden rounded-[30px] border bg-gradient-to-b px-6 py-6 text-left transition duration-300 ease-out [-webkit-tap-highlight-color:transparent] hover:-translate-y-0.5 hover:border-emerald-400/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/60 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-950 active:scale-[0.995] sm:px-8 sm:py-8 ${codeCardClassName}`}
                 onClick={handleCopy}
                 type="button"
               >
