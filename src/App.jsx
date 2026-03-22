@@ -139,7 +139,6 @@ export default function App() {
               </div>
 
               <div className="space-y-3">
-                <p className="text-xs font-medium uppercase tracking-[0.22em] text-amber-200/85">Pulcip Store</p>
                 <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
                   {title}
                 </h1>
