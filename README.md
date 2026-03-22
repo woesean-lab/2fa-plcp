@@ -31,14 +31,16 @@ Bu repo, EasyPanel'de `App` servisi olarak deploy edilmeye hazir.
 1. Projeyi GitHub'a push edin.
 2. EasyPanel'de yeni bir `App` service olusturun.
 3. Source olarak GitHub repository secin.
-4. Repo'da `Dockerfile` oldugu icin EasyPanel bunu kullanarak image build edecektir.
+4. Tercihen builder olarak `Dockerfile` kullanin.
 5. Domain ekleyin.
-6. `Proxy Port` degerini `80` yapin.
-7. Deploy edin.
+6. `Dockerfile` builder kullaniyorsaniz `Proxy Port` degerini `80` yapin.
+7. Nixpacks builder kullaniyorsaniz uygulama `PORT` degiskeninden dinler.
+8. Deploy edin.
 
 ### Notlar
 
 - Bu proje icin environment variable gerekmiyor.
+- Nixpacks kullanilacaksa `package.json` icindeki `engines.node` nedeniyle Node 22 secilir.
 - Query parametreleri aynen calisir:
 
 ```text
