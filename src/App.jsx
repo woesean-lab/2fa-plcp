@@ -107,7 +107,6 @@ export default function App() {
   const copyLabel = copied ? "Copied" : "Tap to copy";
   const secondsLabel = remaining === 1 ? "second" : "seconds";
   const cyclePercent = Math.round((remaining / 30) * 100);
-  const displayOtp = otp.slice(0, 3) + " " + otp.slice(3);
   const panelClassName = copied
     ? "border-amber-300/20 shadow-[0_36px_90px_rgba(2,6,23,0.78)] ring-1 ring-amber-200/10"
     : "border-white/10 shadow-[0_32px_80px_rgba(2,6,23,0.72)]";
@@ -189,7 +188,7 @@ export default function App() {
 
                   <div className="relative mt-8 flex items-end justify-between gap-4">
                     <div className="font-mono text-[3.35rem] font-semibold tracking-[0.24em] text-white sm:text-[5.5rem]">
-                      {displayOtp}
+                      {otp}
                     </div>
                     <div className="hidden rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-right sm:block">
                       <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Refreshes in</div>
