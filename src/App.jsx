@@ -103,7 +103,7 @@ export default function App() {
   const title = error ? "No code available." : "Ready when you are.";
   const subtitle = error
     ? error
-    : "Tap the code once to copy it. A fresh code appears automatically every 30 seconds.";
+    : "Tap once to copy. The code refreshes quietly in the background every 30 seconds.";
   const copyLabel = copied ? "Copied to clipboard" : "Click to copy";
   const secondsLabel = remaining === 1 ? "second" : "seconds";
 
@@ -111,7 +111,7 @@ export default function App() {
     <main className="shell">
       <section className={`card${copied ? " card-copied" : ""}`}>
         <div className="hero">
-          <p className="eyebrow">{error ? "2FA required" : "One-time passcode"}</p>
+          <p className="eyebrow">{error ? "2FA required" : "Verification code"}</p>
           <h1>{title}</h1>
           <p className="intro">{subtitle}</p>
         </div>
