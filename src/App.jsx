@@ -132,25 +132,12 @@ export default function App() {
           className={`w-full max-w-3xl overflow-hidden rounded-[4px] border bg-slate-900/80 backdrop-blur-2xl transition-all duration-200 ${panelClassName}`}
         >
           <div className="p-6 sm:p-8 lg:p-10">
-            <header className="mb-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-5 border-b border-white/10 pb-6 sm:mb-10 sm:pb-8">
-              <div className="flex flex-col items-start gap-3">
-                <img
-                  src={`${import.meta.env.BASE_URL}pulcip.svg`}
-                  alt="Pulcip"
-                  width="3162"
-                  height="599"
-                  className="h-auto w-24 sm:w-28"
-                />
-                <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-slate-400">
-                  2FA Authenticator
-                </span>
-              </div>
-              <div className="inline-flex items-center gap-2 rounded-[4px] border border-amber-300/15 bg-amber-300/[0.05] px-3 py-1.5 text-xs font-medium text-amber-200">
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-amber-300 shadow-[0_0_12px_rgba(252,211,77,0.5)]" />
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-[4px] border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-slate-300">
+                <span className="h-2 w-2 rounded-full bg-amber-300 shadow-[0_0_18px_rgba(252,211,77,0.75)]" />
                 {error ? "2FA required" : "Live authenticator"}
               </div>
-            </header>
-            <div className="space-y-4">
+
               <div className="space-y-3">
                 <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
                   {title}
