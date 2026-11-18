@@ -139,7 +139,7 @@ export default function App() {
                   alt="Pulcip"
                   width="3162"
                   height="599"
-                  className="h-auto w-36 sm:w-44"
+                  className="h-auto w-24 sm:w-28"
                 />
                 <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-slate-400">
                   2FA Authenticator
